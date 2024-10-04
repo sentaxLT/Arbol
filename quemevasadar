@@ -1,0 +1,89 @@
+package Arbolitodenavidad;
+
+class Nodo {
+    int valor;
+    Nodo izquierdo, derecho;
+
+    public Nodo(int valor) {
+        this.valor = valor;
+        izquierdo = derecho = null;
+    }
+}
+
+class ArbolBinario {
+    Nodo raiz;
+
+    public ArbolBinario() {
+        raiz = null;
+    }
+
+    void insertar(int valor) {
+        raiz = insertarRec(raiz, valor);
+    }
+
+    Nodo insertarRec(Nodo raiz, int valor) {
+        if (raiz == null) {
+            raiz = new Nodo(valor);
+            return raiz;
+        }
+        if (valor < raiz.valor)
+            raiz.izquierdo = insertarRec(raiz.izquierdo, valor);
+        else if (valor > raiz.valor)
+            raiz.derecho = insertarRec(raiz.derecho, valor);
+        return raiz;
+    }
+
+    void preorden(Nodo nodo) {
+        if (nodo != null) {
+            System.out.print(nodo.valor + " ");
+            preorden(nodo.izquierdo);
+            preorden(nodo.derecho);
+        }
+    }
+
+    void inorden(Nodo nodo) {
+        if (nodo != null) {
+            inorden(nodo.izquierdo);
+            System.out.print(nodo.valor + " ");
+            inorden(nodo.derecho);
+        }
+    }
+
+    void postorden(Nodo nodo) {
+        if (nodo != null) {
+            postorden(nodo.izquierdo);
+            postorden(nodo.derecho);
+            System.out.print(nodo.valor + " ");
+        }
+    }
+}
+
+public class quemevasadar {
+    public static void main(String[] args) {
+        ArbolBinario arbol = new ArbolBinario();
+        arbol.insertar(9);
+        arbol.insertar(4);
+	arbol.insertar(7);
+        arbol.insertar(6);
+        arbol.insertar(85);
+	arbol.insertar(40);
+        arbol.insertar(22);
+        arbol.insertar(11);
+        arbol.insertar(37);
+        arbol.insertar(39);
+        arbol.insertar(47);
+        arbol.insertar(90);
+        arbol.insertar(88);
+        arbol.insertar(94);
+
+
+        System.out.println("Recorrido en preorden:");
+        arbol.preorden(arbol.raiz);
+
+        System.out.println("\nRecorrido en inorden:");
+        arbol.inorden(arbol.raiz);
+
+        System.out.println("\nRecorrido en postorden:");
+        arbol.postorden(arbol.raiz);
+    }
+}
